@@ -1,15 +1,16 @@
 .App {
     text-align: left;
     background-color: #b3dcfd;
-    width: 40%;
+    width: 100%;
     align-items: first baseline;
     margin-left: auto;
     margin-right: auto;
-    height: 600px;
+    height: 917px;
     border: #fff;
     border-radius: 15px;
     padding-top: 10px;
     margin-top: 20px;
+    position: relative;
 }
 
 .App-logo {
@@ -45,4 +46,19 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+form {
+    position: absolute;
+    bottom: 20px;
+}
+
+button {
+    width: 10rem;
+    height: 2rem;
+    margin: 5px;
+    border: none;
+    background: cadetblue;
+    border-radius: 5px;
+    cursor: pointer;
 }

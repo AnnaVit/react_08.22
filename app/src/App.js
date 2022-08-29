@@ -1,23 +1,52 @@
 import './App.css';
 import {Message} from "./components/Message";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function App() {
 
-    const [messages, setMessages] = useState([
-        'сообщение 1',
-        'сообщение 2',
-        'сообщение 3',
-    ]);
+    const [messages, setMessages] = useState([]);
+    const [newMessage, setNewMessage] = useState('');
 
-  return (
+    const handleSendMassage = (e) => {
+        e.preventDefault();
+        let name = 'MyName';
+        if(newMessage !== ''){
+            setMessages([...messages, {name: name , message: ' ' + newMessage}]);
+            setNewMessage('');
+        }
+    }
 
-    <div className="App">
+    const handleChange = (event) => {
+            setNewMessage(event.target.value);
+    }
+
+    const botMessage = () => {
+        let name = 'Bot';
+        let message = 'Bot message';
+        setMessages([...messages, {name: name , message: ' ' + message}]);
+
+    }
+
+    useEffect(() => {
+        if(messages.length !== 0 && messages[messages.length - 1].name !== 'Bot') {
+           const timeout =  setTimeout(botMessage, 2000);
+
+            return () => {
+                clearTimeout(timeout);
+            }
+        }
+    }, [messages]);
+
+    return <div className="App">
         {messages.map((message,index) =>
-            <Message key={index} message={message}/>
+            <Message key={index} author={message.name}  message={message.message} />
         )}
+
+      <form onSubmit={handleSendMassage}>
+          <input type="text" onChange={handleChange} value={newMessage}/>
+          <button>Send message</button>
+      </form>
     </div>
-  );
 }
 
 export default App;
