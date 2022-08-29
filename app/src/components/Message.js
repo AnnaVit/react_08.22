@@ -1,8 +1,9 @@
 import './styles/message.css';
 
-export const Message = ({message}) => {
+export const Message = ({message, author}) => {
 
-    return(
-        <input type="text" readOnly={message} value={message}/>
-    );
+    return <>
+        <p>{author}</p>
+        <p>{message}</p>
+    </>
 }
