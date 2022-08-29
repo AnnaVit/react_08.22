@@ -1,6 +1,6 @@
 import './App.css';
 import {Message} from "./components/Message";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function App() {
 
@@ -17,6 +17,20 @@ function App() {
     const handleChange = (event) => {
         setNewMessage(event.target.value);
     }
+
+    const botMessage = () => {
+        let name = 'Bot';
+        let message = 'Bot message';
+        setMessages([...messages, {name: name , message: ' ' + message}]);
+
+    }
+
+    useEffect(() => {
+        if(messages.length !== 0 && messages[messages.length - 1].name !== 'Bot') {
+            botMessage();
+        }
+
+    }, [messages]);
 
     return <div className="App">
         {messages.map((message,index) =>
