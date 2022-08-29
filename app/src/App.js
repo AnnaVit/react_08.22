@@ -10,12 +10,14 @@ function App() {
     const handleSendMassage = (e) => {
         e.preventDefault();
         let name = 'MyName';
-        setMessages([...messages, {name: name , message: ' ' + newMessage}]);
-        setNewMessage(' ');
+        if(newMessage !== ''){
+            setMessages([...messages, {name: name , message: ' ' + newMessage}]);
+            setNewMessage('');
+        }
     }
 
     const handleChange = (event) => {
-        setNewMessage(event.target.value);
+            setNewMessage(event.target.value);
     }
 
     const botMessage = () => {
@@ -27,9 +29,12 @@ function App() {
 
     useEffect(() => {
         if(messages.length !== 0 && messages[messages.length - 1].name !== 'Bot') {
-            botMessage();
-        }
+           const timeout =  setTimeout(botMessage, 2000);
 
+            return () => {
+                clearTimeout(timeout);
+            }
+        }
     }, [messages]);
 
     return <div className="App">
