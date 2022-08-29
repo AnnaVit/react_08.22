@@ -10,7 +10,8 @@ function App() {
     const handleSendMassage = (e) => {
         e.preventDefault();
         let name = 'MyName';
-        setMessages([...messages, {name: name + ' :', message: ' ' + newMessage}]);
+        setMessages([...messages, {name: name , message: ' ' + newMessage}]);
+        setNewMessage(' ');
     }
 
     const handleChange = (event) => {
@@ -23,7 +24,7 @@ function App() {
         )}
 
       <form onSubmit={handleSendMassage}>
-          <input type="text" onChange={handleChange}/>
+          <input type="text" onChange={handleChange} value={newMessage}/>
           <button>Send message</button>
       </form>
     </div>
